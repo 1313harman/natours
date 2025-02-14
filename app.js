@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
-const app = express();
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const AppError = require('./utils/appError');
@@ -15,6 +14,8 @@ const hpp = require('hpp');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
+
+const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 //1) GLOBAL MIDDLEWARES
