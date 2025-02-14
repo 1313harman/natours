@@ -26,7 +26,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
   if (!tour) {
     return next(new AppError('There is no tour with that name', 404));
   }
-  console.log(tour.name);
+  // console.log(tour.name);
   // 2) Build template
 
   //
@@ -69,7 +69,7 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 });
 
 exports.updateUserData = catchAsync(async (req, res, next) => {
-  console.log('Update User', req.body);
+  // console.log('Update User', req.body);
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
     {

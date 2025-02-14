@@ -43,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
   });
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
+  // console.log(url);
   await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
   // const token = signToken(newUser._id);
@@ -65,7 +65,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   // 2) check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password');
-  console.log(user);
+  // console.log(user);
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password'), 401);
   }
@@ -198,12 +198,12 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1) Get User based on the token
-  console.log(req.params.token);
+  // console.log(req.params.token);
   const hashedToken = crypto
     .createHash('sha256')
     .update(req.params.token)
     .digest('hex');
-  console.log(hashedToken);
+  // console.log(hashedToken);
   const user = await User.findOne({
     passwordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() },

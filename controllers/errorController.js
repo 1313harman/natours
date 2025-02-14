@@ -29,7 +29,7 @@ const sendErrorDev = (req, res, err) => {
     });
   }
   // B) Rendered Website
-  console.log('Error💥', err);
+  // console.log('Error💥', err);
   return res.status(err.statusCode).render('error', {
     title: 'Something went wrongg',
     msg: err.message,
@@ -82,7 +82,7 @@ module.exports = (err, req, res, next) => {
     let error = err;
     error.message = err.message;
     // error.message = error.message;
-    console.log(error.code);
+    // console.log(error.code);
     // console.log(error.name);
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateValueDB(error);

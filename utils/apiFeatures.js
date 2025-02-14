@@ -9,14 +9,14 @@ class APIfeatures {
     const queryObj = { ...this.queryString };
     const excludeObj = ['sort', 'limit', 'page', 'fields'];
     excludeObj.forEach((el) => delete queryObj[el]);
-    console.log('from filter method', this.queryString);
+    // console.log('from filter method', this.queryString);
     //output is { difficulty: 'easy', duration: { $gte instead of this=>gte: '5' }, page: '5' }
     let queryString = JSON.stringify(queryObj);
     queryString = queryString.replace(
       /\b(gte|gt|lt|lte)\b/g,
       (match) => `$${match}`,
     );
-    console.log(queryObj);
+    // console.log(queryObj);
     //Now the output is {"difficulty":"easy","duration":{"$gte":"5"}}
     this.query.find(JSON.parse(queryString));
     return this;
@@ -25,7 +25,7 @@ class APIfeatures {
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
-      console.log(sortBy);
+      // console.log(sortBy);
       //output for ex:-price ratingsAverage from this { sort: '-price,ratingsAverage' }
       this.query = this.query.sort(sortBy);
     } else {
@@ -37,7 +37,7 @@ class APIfeatures {
   limit() {
     if (this.queryString.fields) {
       const onlyFields = this.queryString.fields.split(',').join(' ');
-      console.log(onlyFields);
+      // console.log(onlyFields);
       //Output is name duration price instead of this { fields: 'name,duration,price' }
       this.query = this.query.select(onlyFields);
     } else {

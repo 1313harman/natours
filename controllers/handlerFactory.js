@@ -4,7 +4,7 @@ const APIfeatures = require('./../utils/apiFeatures');
 
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.params);
+    // console.log(req.params);
     const doc = await Model.findByIdAndDelete(req.params.id);
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
@@ -58,12 +58,12 @@ exports.getOne = (Model, popOptions) =>
         data: doc,
       },
     });
-    console.log('this are the requested parameters :', req.params.id);
+    // console.log('this are the requested parameters :', req.params.id);
   });
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.query);
+    // console.log(req.query);
     let filter = {};
     if (req.params.tourID) filter = { tour: req.params.tourID };
     const features = new APIfeatures(Model.find(filter), req.query)

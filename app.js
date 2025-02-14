@@ -14,6 +14,7 @@ const hpp = require('hpp');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const compression = require('compression');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -48,7 +49,7 @@ app.use(
   }),
 );
 // CHECKING THE CURRENT MODE development || production
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
@@ -89,6 +90,9 @@ app.use((req, res, next) => {
   console.log('Hello from the middleware 😁');
   next();
 });
+
+app.use(compression());
+
 // TEST MIDDLEWARE
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString().slice(0, 10);

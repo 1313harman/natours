@@ -15,7 +15,7 @@ if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
   displayMap(locations);
 }
-console.log(loginForm);
+// console.log(loginForm);
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -24,12 +24,12 @@ if (loginForm) {
     login(email, password);
   });
 }
-console.log(logOuBtn);
+// console.log(logOuBtn);
 if (logOuBtn) {
   logOuBtn.addEventListener('click', logout);
 }
 
-console.log(updateForm);
+// console.log(updateForm);
 if (updateForm) {
   updateForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -37,12 +37,12 @@ if (updateForm) {
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form);
+    // console.log(form);
     updateSettings(form, 'data');
   });
 }
 
-console.log(updateFormPassword);
+// console.log(updateFormPassword);
 if (updateForm) {
   updateFormPassword.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ if (updateForm) {
   });
 }
 
-console.log(bookBtn);
+// console.log(bookBtn);
 if (bookBtn) {
   bookBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
