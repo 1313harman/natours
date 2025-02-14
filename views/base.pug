@@ -1,0 +1,25 @@
+doctype html
+html
+    head 
+        block head
+            script(src=`https://maps.googleapis.com/maps/api/js?key=AIzaSyBXZIlPoT_0ObR-7vLdiT7owDLMvUbYad8`)
+            meta(charset="UTF-8") 
+            meta(name="viewport" content="width=device-width, initial-scale=1.0")
+            meta(http-equiv="Content-Security-Policy" content="script-src 'self' https://maps.googleapis.com https://js.stripe.com; frame-src 'self' https://js.stripe.com;")
+            link(rel="stylesheet",href="/css/style.css")
+            link(rel="shortcut icon" type="image/png" href='/img/favicon.png')
+            link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700")
+            title Natours | #{title}
+    body
+        //- HEADER
+        include _header
+
+        //- Content
+        block content
+            h1 This is a placeholder heading
+        
+        //- Footer
+        include _footer
+        //- script(src="/js/mapbox.js")
+        script(src="https://js.stripe.com/v3/")
+        script(src="/js/bundle.js")
