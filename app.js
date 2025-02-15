@@ -24,6 +24,9 @@ app.set('views', path.join(__dirname, 'views'));
 //1) GLOBAL MIDDLEWARES
 // Implement CORS
 app.use(cors());
+// Access-Control-Allow-Origin = *
+app.options('*', cors());
+// app.options('/api/v1/tours/:id',cors())
 // SECURITY HTTP
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
