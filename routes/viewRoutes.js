@@ -20,7 +20,11 @@ router
 router.route('/me').get(authController.protect, viewsController.getAccount);
 router
   .route('/my-tours')
-  .get(authController.protect, viewsController.getMyTours);
+  .get(
+    bookingController.createBookingCheckout,
+    authController.protect,
+    viewsController.getMyTours,
+  );
 router.post(
   '/submit-user-data',
   authController.protect,

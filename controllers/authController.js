@@ -12,16 +12,16 @@ const signToken = (id) => {
   });
 };
 
-const createSendToken = (user, statusCode, req, res) => {
+const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
-
-  res.cookie('jwt', token, {
+  const cookieOptions = {
     expires: new Date(
       Date.now() + process.env.JWI_EXPIRES_IN * 24 * 60 * 60 * 100,
     ),
     httpOnly: true,
-    secure: req.secure || req.headers(x - forwarded - proto) === 'https',
-  });
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  res.cookie('jwt', token, cookieOptions);
   user.password = undefined;
   res.status(statusCode).json({
     status: 'success',
@@ -45,7 +45,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   const url = `${req.protocol}://${req.get('host')}/me`;
   // console.log(url);
   await new Email(newUser, url).sendWelcome();
-  createSendToken(newUser, 201, req, res);
+  createSendToken(newUser, 201, res);
   // const token = signToken(newUser._id);
 
   // res.status(201).json({
@@ -70,7 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password'), 401);
   }
   // 3) if everthing ok send token to client
-  createSendToken(user, 200, req, res);
+  createSendToken(user, 200, res);
   // const token = signToken(user._id);
   // res.status(200).json({
   //   status: 'success',
@@ -221,7 +221,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3) update changePasswordAt property for the user
   // 4) Log the user in, send JWT
-  createSendToken(user, 200, req, res);
+  createSendToken(user, 200, res);
   // const token = signToken(user._id);
   // res.status(200).json({
   //   status: 'success',
@@ -242,7 +242,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
   // 4) Log User in, send JWT
-  createSendToken(user, 200, req, res);
+  createSendToken(user, 200, res);
   // const token = signToken(user._id);
   // res.status(200).json({
   //   status: 'success',
