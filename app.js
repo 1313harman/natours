@@ -15,13 +15,15 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const compression = require('compression');
-
+const cors = require('cors');
 const app = express();
 // it is need to enable this t use https secure connections while deployment
 app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 //1) GLOBAL MIDDLEWARES
+// Implement CORS
+app.use(cors());
 // SECURITY HTTP
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
@@ -103,7 +105,7 @@ app.use((req, res, next) => {
 });
 // SETTING ROUTINGS
 app.use('/', viewRouter);
-app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/tours', cors(), tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/booking', bookingRouter);
